@@ -36,6 +36,9 @@ def ledToggleBlue():
 	else:
 		BlueLed.on()
 		ledButtonBlue["text"] = "Turn Blue LED off"
+def close():
+	RPi.GPIO.cleanup()
+	win.destroy()
 
 ## Widgets
 print ("starting app")
@@ -47,5 +50,10 @@ ledButtonRed.grid(row=0, column=2)
 
 ledButtonBlue = Button(win, text = 'Turn Blue LED On', font = myFont, command = ledToggleBlue, bg = 'bisque2', height = 1, width = 25)
 ledButtonBlue.grid(row=0, column=3)
+
+exitButton = Button(win, text = 'Exit', font = myFont, command = close, bg = 'bisque2', height = 1, width = 25)
+exitButton.grid(row=1, column=2)
+
+win.protocol("WM_DELETE_WINDOW", close)
 
 win.mainloop()
